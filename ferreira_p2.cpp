@@ -13,6 +13,37 @@ void keep_tertiary(int &x){
     }
 }
 
+void gateSetter(string inputConfig, int &x1, bool &x2, bool &x3, bool &x4){
+    if(inputConfig[0] == 'L'){
+        x1 = 0;
+
+    }else if(inputConfig[0] == 'C'){
+        x1 = 1;
+
+    }else if(inputConfig[0] == 'R'){
+        x1 = 2;
+
+    }
+
+    if(inputConfig[1] == 'L'){
+        x2 = false;
+    }else if(inputConfig[1] == 'R'){
+        x2 = true;
+    }
+
+    if(inputConfig[2] == 'L'){
+        x3 = false;
+    }else if(inputConfig[2] == 'R'){
+        x3 = true;
+    }
+
+    if(inputConfig[3] == 'L'){
+        x4 = false;
+    }else if(inputConfig[3] == 'R'){
+        x4 = true;
+    }
+}
+
 void machineStates(int x1, bool x2, bool x3, bool x4){
     if(x1 == 0){
         cout << "L";
@@ -42,11 +73,11 @@ void machineStates(int x1, bool x2, bool x3, bool x4){
 }
 
 int main(int argc, char * argv[]){
-    string input = argv[1];
-    int x1 = 0;
-    bool x2 = false;
-    bool x3 = false;
-    bool x4 = false;
+    string inputConfigs = argv[1];
+    string inputString = argv[2];
+    int x1;
+    bool x2, x3, x4;
+    gateSetter(inputConfigs,x1,x2,x3,x4);
 
     char lastState;
 
@@ -56,9 +87,9 @@ int main(int argc, char * argv[]){
     //ON 1 X1 GOES LEFT CENTER RIGHT AND OPPOSITE FOR 0
 
     
-    for(int i = 0; i < input.size(); i++){
+    for(int i = 0; i < inputString.size(); i++){
         machineStates(x1, x2, x3, x4);
-        if(i != input.size()){
+        if(i != inputString.size()){
             cout << "->";
         }
         if(x1 == 0){
@@ -103,9 +134,9 @@ int main(int argc, char * argv[]){
             x4 = !x4;
 
         }
-        if(input[i] == '1'){
+        if(inputString[i] == '1'){
             x1++;
-        }else if(input[i] == '0'){
+        }else if(inputString[i] == '0'){
             x1--;
         }
         // cout << input[i];
